@@ -62,8 +62,7 @@ class Follower:
 
     def ovt_callback(self, msg):
         self.current_color = self.color_dict[msg.data]
-        if msg.data == "passing":
-            self.passing_fresh = 5
+        self.passing_fresh = 5
 
     def start_callback(self, msg):
         if msg.data == 0:
