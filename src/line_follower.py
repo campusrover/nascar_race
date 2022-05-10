@@ -131,25 +131,18 @@ class Follower:
             self.twist.linear.x = self.speed 
             if self.speed > 0.01:
                 self.twist.angular.z = -float(err) / 100 * 0.2
-                if self.passing_fresh > 0:
-                    self.passing_fresh += -1
-                    if self.current_color == "masking":
-                        print("turning to blue")
-                        self.twist.angular.z = 5
-                    if self.current_color == "blue":
-                        print("turning to masking")
-                        self.twist.angular.z = -5
             else:
                 self.twist.angular.z = 0
         else: #SKIDDING
-            # self.cant_see_count += 1
-            # print("YOU LOST CONTROL") #make something that sets angular to zero and linear to a value, and have the car just continue to drive forward (to simulate loss of control)
-            # self.twist.linear.x = 0
-            # self.twist.angular.z = 0
-            if self.passing_fresh > 0:
-                self.twist.linear.x = 0.05
-                self.twist.angular.z = -0.5
-                self.passing_fresh += -1
+            pass
+        if self.passing_fresh > 0:
+            self.passing_fresh += -1
+            if self.current_color == "masking":
+                print("turning to blue")
+                self.twist.angular.z = 5
+            if self.current_color == "blue":
+                print("turning to masking")
+                self.twist.angular.z = -5
         cv2.imshow("image", image)
         cv2.waitKey(1)
 
