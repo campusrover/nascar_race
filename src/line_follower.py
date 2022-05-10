@@ -137,10 +137,10 @@ class Follower:
             self.passing_fresh += -1
             if self.current_color == "masking":
                 print("turning to blue")
-                self.twist.angular.z = .5
+                self.twist.angular.z = -.5
             if self.current_color == "blue":
                 print("turning to masking")
-                self.twist.angular.z = -.5
+                self.twist.angular.z = .5
 
         cv2.imshow("image", image)
         cv2.waitKey(1)
