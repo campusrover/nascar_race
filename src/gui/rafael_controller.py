@@ -33,7 +33,7 @@ canvas = tk.Canvas(controller, width=300, height=100)
 canvas.grid(columnspan=3)
 
 #Logo + Header
-logo = tk.PhotoImage(file = "/my_ros_data/nascar_race/src/gui/logo.png")
+logo = tk.PhotoImage(file = "/my_ros_data/catkin_ws/src/nascar_race/src/gui/logo.png")
 logo = logo.zoom(10)
 logo = logo.subsample(70)
 logo_label= tk.Label(image = logo)
