@@ -135,7 +135,7 @@ class Follower:
                     self.passing_fresh += -1
                     if self.current_color == "masking":
                         self.twist.angular.z = 5
-                    else:
+                    if self.current_color == "blue":
                         self.twist.angular.z = -5
             else:
                 self.twist.angular.z = 0
