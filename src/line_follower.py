@@ -139,7 +139,7 @@ class Follower:
                     else:
                         self.twist.linear.z = -5
             else:
-                self.twist.angular.z = 0s
+                self.twist.angular.z = 0
         else: #SKIDDING
             # self.cant_see_count += 1
             # print("YOU LOST CONTROL") #make something that sets angular to zero and linear to a value, and have the car just continue to drive forward (to simulate loss of control)
