@@ -133,7 +133,7 @@ class Follower:
                 self.twist.angular.z = -float(err) / 100 * 0.2
                 if self.passing_fresh > 0:
                     self.passing_fresh += -1
-                    if self.current_color == "blue":
+                    if self.current_color == "masking":
                         self.twist.linear.z = 5
                     else:
                         self.twist.linear.z = -5
