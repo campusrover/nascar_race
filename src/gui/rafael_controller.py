@@ -7,7 +7,7 @@ rospy.init_node("tkinter")
 
 controller = tk.Tk()
 
-controller.title("Robc Controller")
+controller.title("Rafael Controller")
 
 speed = 0
 lane = "blue"
@@ -23,9 +23,9 @@ def speed_callback(msg):
     speed_label = tk.Label(controller, text = speed_output, font = "Arial")
 
 #backend stuff
-speed_pub = rospy.Publisher('robc/speed', Int32, queue_size = 5)
-lane_pub = rospy.Publisher('robc/overtake', String, queue_size = 5)
-heat_sub = rospy.Subscriber('robc/heat', Float32, speed_callback)
+speed_pub = rospy.Publisher('rafael/speed', Int32, queue_size = 5)
+lane_pub = rospy.Publisher('rafael/overtake', String, queue_size = 5)
+heat_sub = rospy.Subscriber('rafael/heat', Float32, speed_callback)
 
 #START - controller
 ####CANVAS LAYER
@@ -33,14 +33,14 @@ canvas = tk.Canvas(controller, width=300, height=100)
 canvas.grid(columnspan=3)
 
 #Logo + Header
-logo = tk.PhotoImage(file = "/my_ros_data/catkin_ws/src/nascar/src/gui/logo.png")
+logo = tk.PhotoImage(file = "/my_ros_data/nascar_race/src/gui/logo.png")
 logo = logo.zoom(10)
 logo = logo.subsample(70)
 logo_label= tk.Label(image = logo)
 logo_label.image = logo
 logo_label.grid(column=1,row=0)
 
-controller_title = tk.Label(controller, text = "\nROBC\nCONTROLLER", font = ("Arial",18,"bold"))
+controller_title = tk.Label(controller, text = "\nRAFAEL\nCONTROLLER", font = ("Arial",18,"bold"))
 controller_title.grid(column=1,row=1)
 controller_rules = tk.Label(controller, text = "Press ▲ to Increase Speed\nPress ▼ to Decrease Speed\nPress ◀ ▶ to Switch Lanes\n", font = "Arial")
 controller_rules.grid(column=1,row=2)
