@@ -1,0 +1,25 @@
+**LAYERS: 1 TYPE: MASKING LOCATION: FAR TEST BENCH
+lowerbound = numpy.array([30,0,130])
+upperbound = numpy.array([80,70,255]) # masking tape, far test bench (or 80 20 255)
+
+**LAYERS: 2 TYPE: MASKING LOCATION: OFFICE ROOM (DOOR CLOSED)
+lowerbound: 80/2,0*2.55,50*2.55
+upperbound: 180/2,25*2.55,100*2.55
+
+**LAYERS: 1 TYPE: PAINTERS(BLUE) LOCATION: OFFICE ROOM (DOOR CLOSED)
+lowerbound: 200/2,60*2.55,55*2.55
+upperbound: 210/2,100*2.55,90*2.55
+
+4:09pm, overcast
+"masking":[
+80/2,0*2.55,70*2.55
+]
+"masking":[
+180/2,27*2.55,100*2.55
+],
+], 
+"blue":[
+180/2,60*2.55,40*2.55
+]
+"blue":[
+220/2,100*2.55,90*2.55

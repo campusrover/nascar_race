@@ -1,0 +1,12 @@
+demo day
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   src/gui/gui_try_2.py
+#	modified:   src/gui/tkinter_gui.py
+#	modified:   src/line_follower.py
+#
