@@ -134,8 +134,10 @@ class Follower:
                 if self.passing_fresh > 0:
                     self.passing_fresh += -1
                     if self.current_color == "masking":
+                        print("turning to blue")
                         self.twist.angular.z = 5
                     if self.current_color == "blue":
+                        print("turning to masking")
                         self.twist.angular.z = -5
             else:
                 self.twist.angular.z = 0
