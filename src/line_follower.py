@@ -134,9 +134,9 @@ class Follower:
                 if self.passing_fresh > 0:
                     self.passing_fresh += -1
                     if self.current_color == "masking":
-                        self.twist.linear.z = 5
+                        self.twist.angular.z = 5
                     else:
-                        self.twist.linear.z = -5
+                        self.twist.angular.z = -5
             else:
                 self.twist.angular.z = 0
         else: #SKIDDING
