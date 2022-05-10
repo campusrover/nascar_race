@@ -119,30 +119,29 @@ class Follower:
 
         # print(self.current_color)
         
+        # if it sees the thing
         if M['m00'] > 0:
             cx = int(M['m10']/M['m00'])  #50 IS THE DISPLACEMENT VALUE OF THE CENTROID; ADJUST THIS FROM -100 (left of the line) to 0 (directly on top of the line ) to 100 (right of the line)
             cy = int(M['m01']/M['m00'])
             cv2.circle(image, (cx, cy), 10, (0,0,255), -1)
 
-            # Move at 0.2 M/sec
-            # add a turn if the centroid is not in the center
-            # Hope for the best. Lots of failure modes.
             err = cx - w/2
+
             self.twist.linear.x = self.speed 
             if self.speed > 0.01:
                 self.twist.angular.z = -float(err) / 100 * 0.2
             else:
                 self.twist.angular.z = 0
-        else: #SKIDDING
-            pass
+
         if self.passing_fresh > 0:
             self.passing_fresh += -1
             if self.current_color == "masking":
                 print("turning to blue")
-                self.twist.angular.z = -.5
+                self.twist.angular.z = .5
             if self.current_color == "blue":
                 print("turning to masking")
-                self.twist.angular.z = .5
+                self.twist.angular.z = -.5
+
         cv2.imshow("image", image)
         cv2.waitKey(1)
 
