@@ -3,7 +3,7 @@ from tkinter import ttk
 import rospy
 from std_msgs.msg import Int32,Float32,String
 
-rospy.init_node("tkinter")
+rospy.init_node("robc_controller")
 
 controller = tk.Tk()
 
