@@ -15,15 +15,23 @@ class Visual_Overtake_Monitor:
         self.image_sub = rospy.Subscriber("rafael/raspicam_node/image/compressed", CompressedImage, self.image_callback)
         self.ovt_pub = rospy.Publisher("rafael/overtake", String, queue_size=1)
         self.ovt_pub_2 = rospy.Publisher("robc/overtake", String, queue_size=1)
+        self.start_sub = rospy.Subscriber("rafael/start", Int32, self.start_callback)
         self.raf_passing = False
         self.robc_passing = False
         self.count = 0
         self.image = None
+        self.started = False
+
+    def start_callback(self, msg):
+        if msg.data == 0:
+            self.started = True
     
     def image_callback(self, msg):
         self.image = msg
 
     def image_process(self):
+        if not self.started:
+            return
         result = middle_right_moments(self.image)
         if result[0] > 1000000: # 1 million is close enough for us
             if self.raf_passing:

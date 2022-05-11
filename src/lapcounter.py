@@ -13,12 +13,18 @@ class LapCounter:
         self.image_sub = rospy.Subscriber(f"{turtlename}/raspicam_node/image/compressed", CompressedImage, self.image_callback)
         self.lap_pub = rospy.Publisher(f"{turtlename}/lapCount",Int32,queue_size=1)
         self.ovt_pub = rospy.Publisher(f"{turtlename}/overtake",String, queue_size=1) 
+        self.start_sub = rospy.Subscriber("rafael/start", Int32, self.start_callback)
         self.twist = Twist()
         self.logcount = 0
         self.lostcount = 0
         self.lapcount = 0
         self.time_since_detect = 0
         self.image = None
+        self.started = False
+
+    def start_callback(self, msg):
+        if msg.data == 0:
+            self.started = True
 
     def image_callback(self, msg):
         self.image = msg
