@@ -16,9 +16,9 @@
         <param name = "turtlebot" type = "string" value = "rafael"/>
     </node> -->
 
-    <node name = "rafael_lap_counter" pkg = "nascar_race" type = "lapcounter.py" output = "screen">
+    <!-- <node name = "rafael_lap_counter" pkg = "nascar_race" type = "lapcounter.py" output = "screen">
         <param name = "turtlebot" type = "string" value = "rafael"/>
-    </node>
+    </node> -->
 
 
 </launch>
