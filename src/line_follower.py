@@ -205,4 +205,4 @@ if __name__ == '__main__':
             follower.publish_vel()
         else:
             follower.publish_stop()
-        rospy.Rate(3)
+        rospy.Rate(10)
