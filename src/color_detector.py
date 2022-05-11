@@ -28,11 +28,11 @@ class ColorThing:
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         # hsv value arrays
-        # lower_green = numpy.array([305/2,65*2.55,20*2.55])
-        # upper_green = numpy.array([335/2,80*2.55,50*2.55]) # dark pink square hsv 
+        lower_green = numpy.array([305/2,65*2.55,20*2.55])
+        upper_green = numpy.array([335/2,80*2.55,50*2.55]) # dark pink square hsv 
 
-        lower_green = numpy.array([70/2,50*2.55,55*2.55])
-        upper_green = numpy.array([80/2,80*2.55,80*2.55]) # yellow square hsv 
+        # lower_green = numpy.array([70/2,50*2.55,55*2.55])
+        # upper_green = numpy.array([80/2,80*2.55,80*2.55]) # yellow square hsv 
 
         mask = cv2.inRange(hsv,  lower_green, upper_green)
         masked = cv2.bitwise_and(image, image, mask=mask)
@@ -68,7 +68,7 @@ class ColorThing:
 
 if __name__ == '__main__':
     rospy.init_node('colorthing')
-    lapcounter = ColorThing("robc")
+    lapcounter = ColorThing("rafael")
     rospy.sleep(3) # to allow the camera to initialize PLUS the time to start the race
     while not rospy.is_shutdown():
         lapcounter.image_process()  

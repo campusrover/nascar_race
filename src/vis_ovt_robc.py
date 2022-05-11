@@ -33,6 +33,7 @@ class Visual_Overtake_Monitor:
         if not self.started:
             return
         result = middle_right_moments(self.image)
+        
         if result[0] > 1000000: # 1 million is close enough for us
             if self.robc_passing:
                 self.robc_passing = True

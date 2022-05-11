@@ -32,7 +32,11 @@ class Visual_Overtake_Monitor:
     def image_process(self):
         if not self.started:
             return
+            
         result = middle_right_moments(self.image)
+
+        print(result)
+
         if result[0] > 1000000: # 1 million is close enough for us
             if self.raf_passing:
                 self.raf_passing = True
