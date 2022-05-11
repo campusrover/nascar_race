@@ -8,9 +8,9 @@
         <param name = "turtlebot" type = "string" value = "robc"/>
     </node>
     
-    <node name = "robc_overtake" pkg = "nascar_race" type = "vis_ovt_robc.py" output = "screen">
+    <!-- <node name = "robc_overtake" pkg = "nascar_race" type = "vis_ovt_robc.py" output = "screen">
         <param name = "turtlebot" type = "string" value = "rafael"/>
-    </node>
+    </node> -->
     
 
 </launch>

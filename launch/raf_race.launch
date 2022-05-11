@@ -12,9 +12,9 @@
         <param name = "turtlebot" type = "string" value = "rafael"/>
     </node> -->
 
-    <node name = "rafael_overtake" pkg = "nascar_race" type = "vis_ovt_raf.py" output = "screen">
+    <!-- <node name = "rafael_overtake" pkg = "nascar_race" type = "vis_ovt_raf.py" output = "screen">
         <param name = "turtlebot" type = "string" value = "rafael"/>
-    </node>
+    </node> -->
 
     <node name = "rafael_lap_counter" pkg = "nascar_race" type = "lapcounter.py" output = "screen">
         <param name = "turtlebot" type = "string" value = "rafael"/>
