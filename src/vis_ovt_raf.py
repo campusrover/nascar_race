@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import String, Int32
 from sensor_msgs.msg import LaserScan  
 from sensor_msgs.msg import CompressedImage
 import rospy, cv2, cv_bridge, numpy
