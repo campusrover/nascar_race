@@ -30,6 +30,8 @@ class LapCounter:
         self.image = msg
 
     def image_process(self):
+        if not self.started:
+            return
         # get image from camera
         image = self.bridge.compressed_imgmsg_to_cv2(self.image, desired_encoding = "bgr8")
         # convert bgr8 image to hsv
