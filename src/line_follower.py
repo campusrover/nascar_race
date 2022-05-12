@@ -64,7 +64,7 @@ class Follower:
         # speed here
         # msg type is Int32
         self.speed = msg.data*0.02
-        print("current speed:", self.speed)
+        # print("current speed:", self.speed)
 
     def image_callback(self, msg):
         # image = self.bridge.compressed_imgmsg_to_cv2(msg, desired_encoding = "bgr8")
