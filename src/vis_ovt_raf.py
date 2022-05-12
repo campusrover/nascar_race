@@ -32,9 +32,8 @@ class Visual_Overtake_Monitor:
     def image_process(self):
         if not self.started:
             return
-
         result = middle_right_moments(self.image)
-
+        print(result)
         if result[0] > 100000: # 1 million is close enough for us
             if self.raf_passing:
                 self.raf_passing = True
@@ -53,6 +52,6 @@ if __name__ == '__main__':
     rospy.sleep(3)
     while not rospy.is_shutdown():
         ovt.image_process()
-        rospy.sleep(2)
-        # rospy.Rate(1)
+        print("overtake check")
+        rospy.Rate(0.25).sleep()
     rospy.spin()

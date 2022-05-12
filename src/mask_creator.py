@@ -43,7 +43,7 @@ def middle_right_moments(input):
     right[0:h, 0:search_left2] = 0
 
     #show mask
-    cv2.imshow("robovision", right)
+    # cv2.imshow("robovision", right)
 
     moments_right = cv2.moments(right)
 

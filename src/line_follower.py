@@ -12,9 +12,10 @@ class Follower:
         self.image_sub = rospy.Subscriber(f"{turtlename}/raspicam_node/image/compressed", CompressedImage, self.image_callback)
         self.lap_sub = rospy.Subscriber(f"{turtlename}/lapCount", Int32, self.lap_callback)
         self.start_sub = rospy.Subscriber(f"{turtlename}/start", Int32, self.start_callback)
+        self.ovt_sub = rospy.Subscriber(f"{turtlename}/overtake", String, self.ovt_callback)
         self.cmd_vel_pub = rospy.Publisher(f"{turtlename}/cmd_vel", Twist, queue_size=1)
         self.heat_pub = rospy.Publisher(f"{turtlename}/heat", Float32, queue_size=1)
-        self.ovt_sub = rospy.Subscriber(f"{turtlename}/overtake", String, self.ovt_callback)
+        self.ovh_pub = rospy.Publisher(f"{turtlename}/overheat", String, queue_size=1)
         self.cant_see_count = 0
         self.twist=Twist()
         self.speed = 0.02
@@ -24,20 +25,35 @@ class Follower:
         self.laps = 0
         self.finished_race = False
         self.time = None 
+        # self.lower_colors = {
+        #     "masking":[
+        #         80/2,0*2.55,55*2.55
+        #         ], 
+        #     "blue":[
+        #         180/2,45*2.55,40*2.55
+        #         ]
+        #     }
+        # self.upper_colors = {
+        #     "masking":[
+        #         200/2,35*2.55,100*2.55
+        #         ], 
+        #     "blue":[
+        #         220/2,100*2.55,90*2.55
+        #         ]}
         self.lower_colors = {
             "masking":[
-                80/2,0*2.55,55*2.55
+                150/2,10*2.55,60*2.55
                 ], 
             "blue":[
-                180/2,45*2.55,40*2.55
+                180/2,80*2.55,40*2.55
                 ]
             }
         self.upper_colors = {
             "masking":[
-                200/2,35*2.55,100*2.55
+                190/2,50*2.55,100*2.55
                 ], 
             "blue":[
-                220/2,100*2.55,90*2.55
+                220/2,100*2.55,100*2.55
                 ]}
         self.color_dict = {"not passing":"blue","passing":"masking"}
         self.current_color = "blue"
@@ -73,10 +89,7 @@ class Follower:
             return
 
     def publish_vel(self):
-        if not self.finished_race:
-            self.cmd_vel_pub.publish(self.twist)
-        else:
-            print("Race finished! Time: %.3" % self.total_time)
+        self.cmd_vel_pub.publish(self.twist)
     
     def publish_stop(self):
         self.cmd_vel_pub.publish(Twist())
@@ -116,23 +129,24 @@ class Follower:
     # Compute the "centroid" and display a red circle to denote it
         M = cv2.moments(mask)
         # print("M00 %d %d" % (M['m00']))
-
-        # print(self.current_color)
         
         # if it sees the thing
         if M['m00'] > 0:
             cx = int(M['m10']/M['m00'])  #50 IS THE DISPLACEMENT VALUE OF THE CENTROID; ADJUST THIS FROM -100 (left of the line) to 0 (directly on top of the line ) to 100 (right of the line)
             cy = int(M['m01']/M['m00'])
             cv2.circle(image, (cx, cy), 10, (0,0,255), -1)
-
             err = cx - w/2
-
-            self.twist.linear.x = self.speed 
+            offset = -float(err) / 100
             if self.speed > 0.01:
-                self.twist.angular.z = -float(err) / 100 * 0.2
+                self.twist.angular.z = offset * 0.2
             else:
                 self.twist.angular.z = 0
-
+            # experimental speed regulator
+            if self.speed > 1:
+                self.twist.linear.x = self.speed * (1 - (offset/3))
+            else:
+                self.twist.linear.x = self.speed * (1 - (offset/3))
+                
         if self.passing_fresh > 0:
             self.passing_fresh += -1
             if self.current_color == "masking":
@@ -147,17 +161,18 @@ class Follower:
 
     def fuel_tick(self):
         #print("HEAT: ", round(self.heat,2))
-        
         if self.heat < 0:
             self.overheated = False
+            self.ovh_pub.publish("no")
             self.heat = 0
         if self.overheated:
             self.heat += -0.05
             self.heat_pub.publish(self.heat)
             return False
-        if self.heat >= 200:
-            self.heat = 200
+        if self.heat >= 100:
+            self.heat = 100
             self.overheated = True
+            self.ovh_pub.publish("yes")
             self.heat_pub.publish(self.heat)
             return False
         # 6,7,8,9 2,4,8,16 /s max 50
@@ -179,7 +194,6 @@ class Follower:
             self.heat += .06
         if self.speed == 0.2:
             self.heat += .08
-
         if self.heat < 0:
             self.heat = 0
       
@@ -196,7 +210,7 @@ if __name__ == '__main__':
     while True:
         if follower.is_started:
             break
-        rospy.Rate(10)
+        rospy.Rate(10).sleep()
 
     # main loop
     while not rospy.is_shutdown():
@@ -205,4 +219,4 @@ if __name__ == '__main__':
             follower.publish_vel()
         else:
             follower.publish_stop()
-        rospy.Rate(10)
+        rospy.Rate(10).sleep()

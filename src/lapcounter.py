@@ -72,6 +72,6 @@ if __name__ == '__main__':
     rospy.sleep(10) # to allow the camera to initialize
     while not rospy.is_shutdown():
         lapcounter.image_process()  
-        rospy.Rate(0.5)
+        rospy.Rate(0.5).sleep()
     rospy.spin()
 

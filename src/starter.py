@@ -21,7 +21,7 @@ if __name__ == '__main__':
     for i in range (0,6):
         cd = 5-i
         starter.pub(cd)
-        print(cd)
+        # print(cd)
         rospy.sleep(1)
 
     rospy.spin()

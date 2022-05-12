@@ -28,27 +28,34 @@ class ColorThing:
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         # hsv value arrays
-        lower_green = numpy.array([305/2,65*2.55,20*2.55])
-        upper_green = numpy.array([335/2,80*2.55,50*2.55]) # dark pink square hsv 
+        # lower_green = numpy.array([305/2,65*2.55,20*2.55])
+        # upper_green = numpy.array([335/2,80*2.55,50*2.55]) # dark pink square hsv 
 
         # lower_green = numpy.array([70/2,50*2.55,55*2.55])
         # upper_green = numpy.array([80/2,80*2.55,80*2.55]) # yellow square hsv 
+
+        lower_green = numpy.array([180/2,80*2.55,40*2.55])
+        upper_green = numpy.array([220/2,100*2.55,100*2.55])
+
+        # lower_green = numpy.array([0/2,0*2.55,0*2.55])
+        # upper_green = numpy.array([360/2,100*2.55,100*2.55])        
 
         mask = cv2.inRange(hsv,  lower_green, upper_green)
         masked = cv2.bitwise_and(image, image, mask=mask)
         # ignore all of image except 30 pixel slice at bottom
         h, w, d = image.shape
         
+        
         #CROPPER
         #HEIGHT show only the top of the mask (everything below first 1/3 is hidden)
-        search_top = int(h /3)
-        mask[search_top:h, 0:w] = 0
+        # search_top = int(h /3)
+        # mask[search_top:h, 0:w] = 0
 
-        #WIDTH (MIDDLE) show only the middle of the mask (hide the left 1/3, and right -1/3)
-        search_left = int(w/3)
-        search_right = int(2*w/3)
-        mask[0:h, 0:search_left] = 0
-        mask[0:h, search_right:w] = 0
+        # #WIDTH (MIDDLE) show only the middle of the mask (hide the left 1/3, and right -1/3)
+        # search_left = int(w/3)
+        # search_right = int(2*w/3)
+        # mask[0:h, 0:search_left] = 0
+        # mask[0:h, search_right:w] = 0
 
         #WIDTH (RIGHT) show only the top right 1/3 corner of the mask
         # search_left = int(2*w/3)
