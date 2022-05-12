@@ -185,15 +185,15 @@ class Follower:
         if self.speed == 0.08:
             self.heat += -.04
         if self.speed == 0.12:
-            self.heat += .01
-        if self.speed == 0.14:
             self.heat += .02
-        if self.speed == 0.16:
+        if self.speed == 0.14:
             self.heat += .04
-        if self.speed == 0.18:
-            self.heat += .06
-        if self.speed == 0.2:
+        if self.speed == 0.16:
             self.heat += .08
+        if self.speed == 0.18:
+            self.heat += .12
+        if self.speed == 0.21:
+            self.heat += .16
         if self.heat < 0:
             self.heat = 0
       

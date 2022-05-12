@@ -11,6 +11,10 @@
     <!-- <node name = "robc_overtake" pkg = "nascar_race" type = "vis_ovt_robc.py" output = "screen">
         <param name = "turtlebot" type = "string" value = "rafael"/>
     </node> -->
+
+    <node name = "robc_info_panel" pkg = "nascar_race" type = "info_panel_2.py" output = "screen">
+        <param name = "turtlebot" type = "string" value = "robc"/>
+    </node>
     
 
 </launch>

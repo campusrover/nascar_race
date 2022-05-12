@@ -62,7 +62,7 @@ class InfoPanel:
         print("=================")
 
 if __name__ == '__main__':
-    rospy.init_node("panel_1")
+    rospy.init_node("panel_2")
     turtlename = rospy.get_param('~turtlebot')
     info = InfoPanel(turtlename)
     while not rospy.is_shutdown():
